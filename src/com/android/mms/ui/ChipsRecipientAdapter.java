@@ -36,8 +36,9 @@ public class ChipsRecipientAdapter extends BaseRecipientAdapter {
      * Each View must contain two TextViews (for display name and destination) and one ImageView
      * (for photo). Ids for those should be available via {@link #getDisplayNameId()},
      * {@link #getDestinationId()}, and {@link #getPhotoId()}.
-     */
+     *
     @Override
+    */
     protected int getItemLayout() {
         return R.layout.mms_chips_recipient_dropdown_item;
     }
