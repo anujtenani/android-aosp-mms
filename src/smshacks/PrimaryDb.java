@@ -1,24 +1,11 @@
 package smshacks;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.regex.Pattern;
 
-import com.smartanuj.fileutils.FileUtils;
-import com.smartanuj.sms.obj.BlackListObj;
-import com.smartanuj.sms.obj.CallObj;
-import com.smartanuj.sms.obj.SMSObj;
-
-import android.app.AlarmManager;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
-import android.os.Environment;
 import android.telephony.PhoneNumberUtils;
 
 public class PrimaryDb extends SQLiteOpenHelper{
