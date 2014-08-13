@@ -35,8 +35,7 @@ public class PrivilegedSmsReceiver extends SmsReceiver {
 		Iterator<String> keys = msgs.keySet().iterator();
 		while (keys.hasNext()) {
 			String phone = keys.next();
-			BlackListObj bObj = db.isBlackList(phone);
-			if (bObj.id > 0) {
+			if (db.isBlackList(phone)) {
 				sendBroadcast(new Intent("com.smartanuj.hideitpro.sms_received"));
 				abortBroadcast();
 				return;
