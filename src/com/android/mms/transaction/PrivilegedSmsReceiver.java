@@ -19,6 +19,8 @@ package com.android.mms.transaction;
 import android.content.Context;
 import android.content.Intent;
 
+import smshacks.PrimaryDb;
+import smshacks.SMSHelper;
 /**
  * This class exists specifically to allow us to require permissions checks on SMS_RECEIVED
  * broadcasts that are not applicable to other kinds of broadcast messages handled by the
@@ -27,6 +29,22 @@ import android.content.Intent;
 public class PrivilegedSmsReceiver extends SmsReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+    	
+    	Primary db = DbHelper.getPrimaryDb(context);
+		Map<String, String> msgs = SMSHelper.RetrieveMessages(intent);
+		Iterator<String> keys = msgs.keySet().iterator();
+		while (keys.hasNext()) {
+			String phone = keys.next();
+			BlackListObj bObj = db.isBlackList(phone);
+			if (bObj.id > 0) {
+				sendBroadcast(new Intent("com.smartanuj.hideitpro.sms_received"));
+				abortBroadcast();
+				return;
+				}
+			}
+		}
+	}
+    	
         // Pass the message to the base class implementation, noting that it
         // was permission-checked on the way in.
         onReceiveWithPrivilege(context, intent, true);
