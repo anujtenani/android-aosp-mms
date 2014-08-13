@@ -1,19 +1,11 @@
-package com.a;
+package smshacks;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.smartanuj.dbnew.DbHelper;
-import com.smartanuj.dbnew.MainDb;
-import com.smartanuj.dbnew.PrimaryDb;
-import com.smartanuj.sms.CompoundView;
-import com.smartanuj.sms.obj.BlackListObj;
-import com.smartanuj.sms.obj.SMSIntent;
-import com.smartanuj.sms.obj.SMSObj;
-import com.smartanuj.sms.util.NotificationUtil;
-import com.smartanuj.sms.util.Utils;
-
+import smshacks.DbHelper;
+import smshacks.PrimaryDb;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

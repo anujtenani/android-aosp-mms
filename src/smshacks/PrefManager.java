@@ -1,4 +1,4 @@
-package com.smartanuj.dbnew;
+package smshacks;
 
 
 import java.io.File;

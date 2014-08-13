@@ -1,4 +1,4 @@
-package com.smartanuj.dbnew;
+package smshacks;
 
 import android.content.Context;
 import android.os.Build;
