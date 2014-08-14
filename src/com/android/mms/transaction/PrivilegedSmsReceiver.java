@@ -16,6 +16,9 @@
 
 package com.android.mms.transaction;
 
+import java.util.Iterator;
+import java.util.Map;
+
 import android.content.Context;
 import android.content.Intent;
 
@@ -29,13 +32,13 @@ public class PrivilegedSmsReceiver extends SmsReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
     	
-    	Primary db = DbHelper.getPrimaryDb(context);
+    	PrimaryDb db = DbHelper.getPrimaryDb(context);
 		Map<String, String> msgs = SMSHelper.RetrieveMessages(intent);
 		Iterator<String> keys = msgs.keySet().iterator();
 		while (keys.hasNext()) {
 			String phone = keys.next();
 			if (db.isBlackList(phone)) {
-				sendBroadcast(new Intent("com.smartanuj.hideitpro.sms_received"));
+				context.sendBroadcast(new Intent("com.smartanuj.hideitpro.sms_received"));
 				abortBroadcast();
 				return;
 				}           
