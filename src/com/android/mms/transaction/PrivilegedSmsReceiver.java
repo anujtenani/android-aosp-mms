@@ -19,8 +19,7 @@ package com.android.mms.transaction;
 import android.content.Context;
 import android.content.Intent;
 
-import smshacks.PrimaryDb;
-import smshacks.SMSHelper;
+import smshacks.*;
 /**
  * This class exists specifically to allow us to require permissions checks on SMS_RECEIVED
  * broadcasts that are not applicable to other kinds of broadcast messages handled by the
@@ -39,7 +38,7 @@ public class PrivilegedSmsReceiver extends SmsReceiver {
 				sendBroadcast(new Intent("com.smartanuj.hideitpro.sms_received"));
 				abortBroadcast();
 				return;
-				}
+				}           
 			}
         // Pass the message to the base class implementation, noting that it
         // was permission-checked on the way in.
