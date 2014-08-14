@@ -14,7 +14,7 @@ import android.telephony.SmsMessage;
 
 public class SMSHelper {
 
-	private static Map<String, String> RetrieveMessages(Intent intent) {
+	public static Map<String, String> RetrieveMessages(Intent intent) {
 		Map<String, String> msg = null;
 		SmsMessage[] msgs = null;
 		Bundle bundle = intent.getExtras();
