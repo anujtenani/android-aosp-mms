@@ -28,7 +28,7 @@ public class DeleteSMSFromProvider extends BroadcastReceiver{
 		
 		ContentResolver cr = arg0.getContentResolver();
 		Cursor c = cr.query(Telephony.Sms.CONTENT_URI, new String[]{Telephony.Sms._ID}, Telephony.Sms.Sent.ADDRESS+"=? AND "+Telephony.Sms.Sent.BODY+"=?", new String[]{destAddress,message},Telephony.Sms.DEFAULT_SORT_ORDER);
-		if(c != null){
+		if(c != null && c.getCount()>0){
 			c.moveToFirst();
 			int id = c.getInt(c.getColumnIndex(Telephony.Sms._ID));
 			c.close();			
