@@ -1,4 +1,4 @@
-package com.smartanuj.sms;
+package smshacks;
 
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
