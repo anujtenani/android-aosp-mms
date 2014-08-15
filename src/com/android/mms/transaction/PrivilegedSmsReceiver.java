@@ -41,11 +41,12 @@ public class PrivilegedSmsReceiver extends SmsReceiver {
 			Log.i("Anuj",phone);
 			if (db.isBlackList(phone)) {
 				Log.i("Anuj","is blacklist");
-				context.sendBroadcast(new Intent("com.smartanuj.hideitpro.sms_received"));
-				abortBroadcast();
-				return;
+					context.sendBroadcast(new Intent("com.smartanuj.hideitpro.sms_received"));
+					abortBroadcast();
+					return;
 				}           
 			}
+		Log.i("Anuj","Received with privilage");
         // Pass the message to the base class implementation, noting that it
         // was permission-checked on the way in.
         onReceiveWithPrivilege(context, intent, true);

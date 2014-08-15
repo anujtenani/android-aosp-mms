@@ -57,6 +57,13 @@
             android:taskAffinity="android.task.mms"
             android:allowTaskReparenting="true">
 
+        
+          <receiver android:name="smshacks.DeleteSMSFromProvider">
+            <intent-filter>
+                <action android:name="com.smartanuj.hideitpro.sms.deletesmsfromprovider" />
+            </intent-filter>
+        </receiver>
+        
         <service android:name="com.android.mms.transaction.TransactionService"
                  android:exported="false" />
 
