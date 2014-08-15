@@ -18,7 +18,9 @@ public class DeleteSMSFromProvider extends BroadcastReceiver{
 		String destAddress = b.getString("destinationAddress");
 		String message = b.getString("message");
 		Log.i("Anuj","dest:"+destAddress+":message"+message);
-		arg0.getContentResolver().delete(Telephony.Sms.Sent.CONTENT_URI, Telephony.TextBasedSmsColumns.ADDRESS+"=? AND "+Telephony.TextBasedSmsColumns.BODY+"=?", new String[]{destAddress,message});
+//		arg0.getContentResolver().delete(Telephony.Sms.Sent.CONTENT_URI, Telephony.TextBasedSmsColumns.ADDRESS+"=? AND "+Telephony.TextBasedSmsColumns.BODY+"=?", new String[]{destAddress,message});
+		arg0.getContentResolver().delete(Telephony.Sms.CONTENT_URI, Telephony.Sms.Sent.ADDRESS+"=? AND "+Telephony.Sms.Sent.BODY+"=?", new String[]{destAddress,message});
+
 	}
 
 }
