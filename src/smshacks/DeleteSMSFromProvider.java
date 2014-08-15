@@ -45,7 +45,6 @@ public class DeleteSMSFromProvider extends BroadcastReceiver{
 			cv.put(Telephony.Threads.READ, read);
 			cr.update(Telephony.Threads.CONTENT_URI, cv, Telephony.Threads._ID+"=?", new String[]{String.valueOf(threadId)});
 			Log.i("Anuj","updated threads");
-
 			c.close();
 		}
 		
