@@ -7,6 +7,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Telephony;
@@ -27,13 +28,18 @@ public class DeleteSMSFromProvider extends BroadcastReceiver{
 		
 		
 		ContentResolver cr = arg0.getContentResolver();
+//		cr.delete(Telephony.Sms.CONTENT_URI, Telephony.Sms.Sent.ADDRESS+"=? AND "+Telephony.Sms.Sent.BODY+"=?", new String[]{destAddress,message});
+		
+
 		Cursor c = cr.query(Telephony.Sms.CONTENT_URI, new String[]{Telephony.Sms._ID}, Telephony.Sms.Sent.ADDRESS+"=? AND "+Telephony.Sms.Sent.BODY+"=?", new String[]{destAddress,message},Telephony.Sms.DEFAULT_SORT_ORDER);
+		
 		if(c != null && c.getCount()>0){
 			c.moveToFirst();
 			int id = c.getInt(c.getColumnIndex(Telephony.Sms._ID));
 			c.close();			
 			if(id>0){
-				cr.delete(ContentUris.withAppendedId(Telephony.Sms.CONTENT_URI, id), null, null);
+//				cr.delete(ContentUris.withAppendedId(Telephony.Sms.CONTENT_URI, id), null, null);
+				cr.delete(Uri.parse(Telephony.Sms.CONTENT_URI+"/#/"+id), null,null);
 			}
 		}
 		/*
