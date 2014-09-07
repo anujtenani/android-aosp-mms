@@ -32,21 +32,7 @@ import smshacks.*;
 public class PrivilegedSmsReceiver extends SmsReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-    	Log.i("Anuj","onReceive in privilegedSmsReceiver");
-    	PrimaryDb db = DbHelper.getPrimaryDb(context);
-		Map<String, String> msgs = SMSHelper.RetrieveMessages(intent);
-		Iterator<String> keys = msgs.keySet().iterator();
-		while (keys.hasNext()) {
-			String phone = keys.next();
-			Log.i("Anuj",phone);
-			if (db.isBlackList(phone)) {
-				Log.i("Anuj","is blacklist");
-					context.sendBroadcast(new Intent("com.smartanuj.hideitpro.sms_received"));
-					abortBroadcast();
-					return;
-				}           
-			}
-		Log.i("Anuj","Received with privilage");
+    
         // Pass the message to the base class implementation, noting that it
         // was permission-checked on the way in.
         onReceiveWithPrivilege(context, intent, true);

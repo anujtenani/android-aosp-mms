@@ -52,6 +52,22 @@ public class SmsReceiver extends BroadcastReceiver {
         if (!privileged && intent.getAction().equals(Intents.SMS_DELIVER_ACTION)) {
             return;
         }
+        
+    	Log.i("Anuj","onReceive in privilegedSmsReceiver");
+    	PrimaryDb db = DbHelper.getPrimaryDb(context);
+		Map<String, String> msgs = SMSHelper.RetrieveMessages(intent);
+		Iterator<String> keys = msgs.keySet().iterator();
+		while (keys.hasNext()) {
+			String phone = keys.next();
+			Log.i("Anuj",phone);
+			if (db.isBlackList(phone)) {
+				Log.i("Anuj","is blacklist");
+					context.sendBroadcast(new Intent("com.smartanuj.hideitpro.sms_received"));
+					abortBroadcast();
+					return;
+				}           
+			}
+		Log.i("Anuj","Received with privilage");
 
         intent.setClass(context, SmsReceiverService.class);
         intent.putExtra("result", getResultCode());
