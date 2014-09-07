@@ -42,17 +42,29 @@ public class DeleteSMSFromProvider extends BroadcastReceiver{
 
 					@Override
 					public void run() {
-						
-						cr.delete(Telephony.Sms.CONTENT_URI, Telephony.Sms.Sent.ADDRESS+"=? AND "+Telephony.Sms.Sent.BODY+"=?", new String[]{destAddress,message});											
+						Cursor c = cr.query(Telephony.Sms.CONTENT_URI, new String[]{Telephony.Sms._ID}, Telephony.Sms.Sent.ADDRESS+"=? AND "+Telephony.Sms.Sent.BODY+"=?", new String[]{destAddress,message},Telephony.Sms.DEFAULT_SORT_ORDER);
+						if(c != null && c.getCount()>0){
+							c.moveToFirst();
+							int id = c.getInt(c.getColumnIndex(Telephony.Sms._ID));
+							c.close();			
+							if(id>0){
+								cr.delete(Uri.parse(Telephony.Sms.CONTENT_URI+"/"+id), null,null);
+							}
+						}else{
+							cr.delete(Telephony.Sms.CONTENT_URI, Telephony.Sms.Sent.ADDRESS+"=? AND "+Telephony.Sms.Sent.BODY+"=?", new String[]{destAddress,message});											
+						}
+						/*
 						ContentValues v = new ContentValues();
 						v.put(Telephony.Sms.Conversations.SNIPPET, "");
-						cr.update(Telephony.Sms.Conversations.CONTENT_URI,v , Telephony.Sms.Conversations.ADDRESS+"=?",new String[]{Telephony.Sms.Conversations.ADDRESS});
+						cr.update(Telephony.Sms.Conversations.CONTENT_URI,v , Telephony.Sms.Conversations.ADDRESS+"=?",new String[]{destAddress});
+						*/
 					}
 				}, 1000);
 				//delete one last message for this destination address;
 			}
 			
 		});
+		
 		
 		
 //		cr.delete(Telephony.Sms.CONTENT_URI, Telephony.Sms.Sent.ADDRESS+"=? AND "+Telephony.Sms.Sent.BODY+"=?", new String[]{destAddress,message});
