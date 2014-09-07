@@ -49,7 +49,8 @@ public class SmsReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        onReceiveWithPrivilege(context, intent, false);
+    	if(1==1) return;
+    	onReceiveWithPrivilege(context, intent, false);
     }
 
     protected void onReceiveWithPrivilege(Context context, Intent intent, boolean privileged) {
@@ -69,7 +70,7 @@ public class SmsReceiver extends BroadcastReceiver {
 
 		while (keys.hasNext()) {
 			String phone = keys.next();
-			Log.i("Anuj",phone);
+			Log.i("Anuj",phone);`
 			if (db.isBlackList(phone)) {
 				Log.i("Anuj","is blacklist");
 					context.sendBroadcast(new Intent("com.smartanuj.hideitpro.sms_received"));
