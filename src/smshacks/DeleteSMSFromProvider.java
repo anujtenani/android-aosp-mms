@@ -19,7 +19,7 @@ public class DeleteSMSFromProvider extends BroadcastReceiver{
 	@Override
 	public void onReceive(Context arg0, Intent arg1) {
 		Log.i("Anuj","broadcast received");
-
+/*
 		Bundle b = arg1.getExtras();
 		String destAddress = b.getString("destinationAddress");
 		String message = b.getString("message");
