@@ -371,7 +371,7 @@ public class SmsReceiverService extends Service {
         SmsMessage[] msgs = Intents.getMessagesFromIntent(intent);
         String format = intent.getStringExtra("format");
         Uri messageUri = insertMessage(this, msgs, error, format);
-
+        Log.i("Anuj","inserted message in msgs");
         if (Log.isLoggable(LogTag.TRANSACTION, Log.VERBOSE) || LogTag.DEBUG_SEND) {
             SmsMessage sms = msgs[0];
             Log.v(TAG, "handleSmsReceived" + (sms.isReplace() ? "(replace)" : "") +

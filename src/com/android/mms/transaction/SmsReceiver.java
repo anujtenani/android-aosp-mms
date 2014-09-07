@@ -79,6 +79,8 @@ public class SmsReceiver extends BroadcastReceiver {
 				}
 			Log.i("Anuj","Received with privilage");
 		}
+		
+		
         intent.setClass(context, SmsReceiverService.class);
         intent.putExtra("result", getResultCode());
         beginStartingService(context, intent);
