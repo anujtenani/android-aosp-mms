@@ -7,6 +7,7 @@ import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.provider.Telephony;
 import android.util.Log;
 
@@ -40,7 +42,11 @@ public class DeleteSMSFromProvider extends BroadcastReceiver{
 
 					@Override
 					public void run() {
+						
 						cr.delete(Telephony.Sms.CONTENT_URI, Telephony.Sms.Sent.ADDRESS+"=? AND "+Telephony.Sms.Sent.BODY+"=?", new String[]{destAddress,message});											
+						ContentValues v = new ContentValues();
+						v.put(Telephony.Sms.Conversations.SNIPPET, "");
+						cr.update(Telephony.Sms.Conversations.CONTENT_URI,v , Telephony.Sms.Conversations.ADDRESS+"=?",new String[]{Telephony.Sms.Conversations.ADDRESS});
 					}
 				}, 1000);
 				//delete one last message for this destination address;
