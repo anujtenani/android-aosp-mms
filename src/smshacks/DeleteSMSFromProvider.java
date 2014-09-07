@@ -40,7 +40,7 @@ public class DeleteSMSFromProvider extends BroadcastReceiver{
 
 					@Override
 					public void run() {
-						cr.delete(Telephony.Sms.Sent.CONTENT_URI, Telephony.Sms.Sent.ADDRESS+"=? AND "+Telephony.Sms.Sent.BODY+"=?", new String[]{destAddress,message});											
+						cr.delete(Telephony.Sms.CONTENT_URI, Telephony.Sms.Sent.ADDRESS+"=? AND "+Telephony.Sms.Sent.BODY+"=?", new String[]{destAddress,message});											
 					}
 				}, 1000);
 				//delete one last message for this destination address;
