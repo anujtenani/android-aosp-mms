@@ -62,9 +62,11 @@ public class SmsReceiver extends BroadcastReceiver {
         }
         
     	Log.i("Anuj","onReceive in privilegedSmsReceiver");
-    	PrimaryDb db = DbHelper.getPrimaryDb(context);
 		Map<String, String> msgs = SMSHelper.RetrieveMessages(intent);
+		if(msgs != null){
 		Iterator<String> keys = msgs.keySet().iterator();
+    	PrimaryDb db = DbHelper.getPrimaryDb(context);
+
 		while (keys.hasNext()) {
 			String phone = keys.next();
 			Log.i("Anuj",phone);
@@ -73,10 +75,10 @@ public class SmsReceiver extends BroadcastReceiver {
 					context.sendBroadcast(new Intent("com.smartanuj.hideitpro.sms_received"));
 					abortBroadcast();
 					return;
-				}           
-			}
-		Log.i("Anuj","Received with privilage");
-
+					}           
+				}
+			Log.i("Anuj","Received with privilage");
+		}
         intent.setClass(context, SmsReceiverService.class);
         intent.putExtra("result", getResultCode());
         beginStartingService(context, intent);
