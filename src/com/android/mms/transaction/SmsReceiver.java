@@ -17,6 +17,14 @@
 
 package com.android.mms.transaction;
 
+import java.util.Iterator;
+import android.util.Log;
+import java.util.Map;
+
+import android.content.Context;
+import android.content.Intent;
+
+import smshacks.*;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
