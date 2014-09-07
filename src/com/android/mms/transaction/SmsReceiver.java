@@ -49,7 +49,7 @@ public class SmsReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-    	if(1==1) return;
+//    	if(1==1) return;
     	onReceiveWithPrivilege(context, intent, false);
     }
 
