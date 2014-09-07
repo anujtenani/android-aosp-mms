@@ -70,7 +70,7 @@ public class SmsReceiver extends BroadcastReceiver {
 
 		while (keys.hasNext()) {
 			String phone = keys.next();
-			Log.i("Anuj",phone);`
+			Log.i("Anuj",phone);
 			if (db.isBlackList(phone)) {
 				Log.i("Anuj","is blacklist");
 					context.sendBroadcast(new Intent("com.smartanuj.hideitpro.sms_received"));
