@@ -1,5 +1,8 @@
 package smshacks;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -10,36 +13,54 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Telephony;
 import android.util.Log;
 
 @TargetApi(Build.VERSION_CODES.KITKAT)
 public class DeleteSMSFromProvider extends BroadcastReceiver{
 
+	ExecutorService exec = Executors.newFixedThreadPool(1);
+	static Handler handler = new Handler();
 	@Override
 	public void onReceive(Context arg0, Intent arg1) {
 		Log.i("Anuj","broadcast received");
-/*
+
 		Bundle b = arg1.getExtras();
-		String destAddress = b.getString("destinationAddress");
-		String message = b.getString("message");
+		final String destAddress = b.getString("destinationAddress");
+		final String message = b.getString("message");
 		Log.i("Anuj","dest:"+destAddress+":message:"+message);
+		final ContentResolver cr = arg0.getContentResolver();
+
+		exec.execute(new Runnable(){
+
+			@Override
+			public void run() {
+				handler.postDelayed(new Runnable(){
+
+					@Override
+					public void run() {
+						cr.delete(Telephony.Sms.Sent.CONTENT_URI, Telephony.Sms.Sent.ADDRESS+"=? AND "+Telephony.Sms.Sent.BODY+"=?", new String[]{destAddress,message});											
+					}
+				}, 1000);
+				//delete one last message for this destination address;
+			}
+			
+		});
 		
 		
-		
-		ContentResolver cr = arg0.getContentResolver();
-		cr.delete(Telephony.Sms.CONTENT_URI, Telephony.Sms.Sent.ADDRESS+"=? AND "+Telephony.Sms.Sent.BODY+"=?", new String[]{destAddress,message});
-		
-/*
+//		cr.delete(Telephony.Sms.CONTENT_URI, Telephony.Sms.Sent.ADDRESS+"=? AND "+Telephony.Sms.Sent.BODY+"=?", new String[]{destAddress,message});
+/*		
+
 		Cursor c = cr.query(Telephony.Sms.CONTENT_URI, new String[]{Telephony.Sms._ID}, Telephony.Sms.Sent.ADDRESS+"=? AND "+Telephony.Sms.Sent.BODY+"=?", new String[]{destAddress,message},Telephony.Sms.DEFAULT_SORT_ORDER);
 		
 		if(c != null && c.getCount()>0){
-	z		c.moveToFirst();
+			c.moveToFirst();
 			int id = c.getInt(c.getColumnIndex(Telephony.Sms._ID));
 			c.close();			
 			if(id>0){
 //				cr.delete(ContentUris.withAppendedId(Telephony.Sms.CONTENT_URI, id), null, null);
-//				cr.delete(Uri.parse(Telephony.Sms.CONTENT_URI+"/#/"+id), null,null);
+				cr.delete(Uri.parse(Telephony.Sms.CONTENT_URI+"/#/"+id), null,null);
 			}
 		}
 		/*
