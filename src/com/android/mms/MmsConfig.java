@@ -43,7 +43,7 @@ public class MmsConfig {
     private static final String DEFAULT_USER_AGENT = "Android-Mms/2.0";
 
 //    private static final String MMS_APP_PACKAGE = "fr.slvn.mms";
-    private static final String MMS_APP_PACKAGE = "com.smartanuj.hideitpro.sms.stock";
+    private static final String MMS_APP_PACKAGE = "com.sms.stock";
     private static final String SMS_PROMO_DISMISSED_KEY = "sms_promo_dismissed_key";
 
     private static final int MAX_IMAGE_HEIGHT = 480;

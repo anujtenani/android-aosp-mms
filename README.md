@@ -19,3 +19,5 @@ http://source.android.com/source/downloading.html
 
 - Take a coffee
 
+-- to change the package, change MMS app from MmsConfig.java too
+
